@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="10">
+    <Properties>
+        <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
+
+        <property name="log_charset">UTF-8</property>
+        <Property name="filename">library</Property>
+        <Property name="log_path">/library/logs</Property>
+        <Property name="library_log_encoding">UTF-8</Property>
+        <Property name="library_log_size">300MB</Property>
+        <property name="data_level">INFO</property>
+        <Property name="library_log_time">5d</Property>
+        <property name="log_pattern" value="%-d{yyyy-MM-dd HH:mm:ss} %-5r [%t] [%-5p] %c %x - %m%n" />
+
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--输出日志的格式-->
+            <PatternLayout pattern="${log_pattern}"/>
+            <!--控制台只输出level及其以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />
+        </Console>
+
+        <RollingRandomAccessFile name="LIBRARY_FILE"
+                                 fileName="${log_path}/${filename}.log"
+                                 filePattern="${log_path}/${filename}_%d{yyyy-MM-dd}_%i.log.gz">
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5p][%t][%c{1}] %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${library_log_size}"/>
+            </Policies>
+        </RollingRandomAccessFile>
+
+        <!-- 这个会打印出所有的error及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <RollingFile name="RollingFileError" fileName="${log_path}/error.log" filePattern="${log_path}/${filename}-ERROR-%d{yyyy-MM-dd}_%i.log.gz">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${log_pattern}"/>
+            <Policies>
+                <!--interval属性用来指定多久滚动一次，默认是1 hour-->
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
+            <DefaultRolloverStrategy max="15"/>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <!--监控系统信息, 若是additivity设为false，则 子Logger 只会在自己的appender里输出，而不会在 父Logger 的appender里输出。-->
+        <AsyncLogger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </AsyncLogger>
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <AsyncLogger name="org.mybatis" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </AsyncLogger>
+        <AsyncLogger additivity="false" name="com.captian.libraryadmin" level="INFO">
+            <AppenderRef ref="Console" level="INFO"/>
+            <AppenderRef ref="LIBRARY_FILE"/>
+            <AppenderRef ref="RollingFileError"/>
+        </AsyncLogger>
+
+        <!--系统相关日志-->
+        <AsyncRoot level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="LIBRARY_FILE"/>
+            <AppenderRef ref="RollingFileError"/>
+        </AsyncRoot>
+    </Loggers>
+</Configuration>

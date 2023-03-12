@@ -9,14 +9,14 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
 /**
- * 用户表(LibUser)实体类
+ * 用户表(User)实体类
  *
  * @author Captian
  * @since 2023-03-09 12:03:54
  */
 @Data
 @TableName(value = "lib_user")
-public class LibUser implements Serializable {
+public class User implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 444393850116871955L;
 
@@ -29,9 +29,13 @@ public class LibUser implements Serializable {
      */
     private Long deptId;
     /**
-     * 用户名
+     * 用户账号
      */
     private String username;
+    /**
+     * 用户姓名
+     */
+    private String realName;
     /**
      * 密码
      */
@@ -43,7 +47,7 @@ public class LibUser implements Serializable {
     /**
      * 手机号码
      */
-    private String phonenumber;
+    private String phone;
     /**
      * 用户性别（0男 1女 2未知）
      */

@@ -1,4 +1,4 @@
-package com.captian.libraryadmin.bo;
+package com.captian.libraryadmin.vo;
 
 import java.time.LocalDateTime;
 
@@ -8,15 +8,15 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
 /**
- * 用户表(LibUser)BO类
+ * 用户表(User)VO类
  *
  * @author Captian
- * @since 2023-03-09 12:03:56
+ * @since 2023-03-09 12:03:55
  */
 @Data
-public class LibUserUpdate implements Serializable {
+public class UserVO implements Serializable {
     @TableField(exist = false)
-    private static final long serialVersionUID = 689453599353810238L;
+    private static final long serialVersionUID = -88369029403694341L;
 
     /**
      * 用户ID
@@ -27,9 +27,13 @@ public class LibUserUpdate implements Serializable {
      */
     private Long deptId;
     /**
-     * 用户名
+     * 用户账号
      */
     private String username;
+    /**
+     * 用户姓名
+     */
+    private String realName;
     /**
      * 密码
      */
@@ -41,7 +45,7 @@ public class LibUserUpdate implements Serializable {
     /**
      * 手机号码
      */
-    private String phonenumber;
+    private String phone;
     /**
      * 用户性别（0男 1女 2未知）
      */
@@ -74,5 +78,19 @@ public class LibUserUpdate implements Serializable {
      * 备注
      */
     private String remark;
+
+    //以下字段是页面显示用
+    /**
+     * 部门名称
+     */
+    private String deptName;
+    /**
+     * 性别名称
+     */
+    private String sexName;
+    /**
+     * 状态名称
+     */
+    private String statusName;
 
 }

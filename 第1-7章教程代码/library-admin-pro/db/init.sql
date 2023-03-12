@@ -12,10 +12,11 @@ DROP TABLE IF EXISTS `lib_user`;
 CREATE TABLE `lib_user` (
    `id`              bigint(20)     NOT NULL    AUTO_INCREMENT    COMMENT '用户ID',
    `dept_id`         bigint(20)              DEFAULT NULL COMMENT '部门ID',
-   `username`        varchar(100)   NOT NULL             COMMENT '用户名',
+   `real_name`        varchar(100)   NOT NULL              COMMENT '用户姓名',
+   `username`        varchar(100)   NOT NULL             COMMENT '用户账号',
    `password`        varchar(100)   NOT NULL             COMMENT '密码',
    `email`           varchar(50)             DEFAULT ''  COMMENT '用户邮箱',
-   `phonenumber`     varchar(11)    NOT NULL DEFAULT ''  COMMENT '手机号码',
+   `phone`           varchar(11)    NOT NULL DEFAULT ''  COMMENT '手机号码',
    `sex`             int            NOT NULL DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
    `avatar`          varchar(100)            DEFAULT ''  COMMENT '头像地址',
    `status`          int                     DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',

@@ -3,21 +3,20 @@ package com.captian.libraryadmin.bo;
 import java.time.LocalDateTime;
 
 import lombok.Data;
-import com.captian.constant.BasePage;
 import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
 
 /**
- * 用户表(LibUser)BO类
+ * 用户表(User)BO类
  *
  * @author Captian
  * @since 2023-03-09 12:03:56
  */
 @Data
-public class LibUserPage extends BasePage implements Serializable {
+public class UserUpdate implements Serializable {
     @TableField(exist = false)
-    private static final long serialVersionUID = -43659243917952524L;
+    private static final long serialVersionUID = 689453599353810238L;
 
     /**
      * 用户ID
@@ -28,9 +27,13 @@ public class LibUserPage extends BasePage implements Serializable {
      */
     private Long deptId;
     /**
-     * 用户名
+     * 用户账号
      */
     private String username;
+    /**
+     * 用户姓名
+     */
+    private String realName;
     /**
      * 密码
      */
@@ -42,7 +45,7 @@ public class LibUserPage extends BasePage implements Serializable {
     /**
      * 手机号码
      */
-    private String phonenumber;
+    private String phone;
     /**
      * 用户性别（0男 1女 2未知）
      */
@@ -59,14 +62,6 @@ public class LibUserPage extends BasePage implements Serializable {
      * 最后登录时间
      */
     private LocalDateTime loginDate;
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-    /**
-     * 修改时间
-     */
-    private LocalDateTime updateTime;
     /**
      * 最后修改密码的日期
      */

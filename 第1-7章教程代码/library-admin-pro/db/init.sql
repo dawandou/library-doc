@@ -109,3 +109,16 @@ CREATE TABLE `lib_role_menu`  (
    `menu_id`    bigint(20)       DEFAULT NULL    COMMENT '菜单ID',
    PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB ROW_FORMAT = Dynamic COMMENT='角色和菜单关联表';
+
+-- ----------------------------
+-- 文件表
+-- ----------------------------
+DROP TABLE IF EXISTS `lib_file`;
+CREATE TABLE `lib_file` (
+   `id`            bigint(20)        NOT NULL    AUTO_INCREMENT COMMENT '主键ID',
+   `name`          varchar(100)      NOT NULL    COMMENT '图片或文件名',
+   `size`          bigint(20)        NOT NULL    COMMENT '大小',
+   `img_path`      varchar(20)       DEFAULT NULL    COMMENT '地址',
+   `create_time`   datetime          NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB ROW_FORMAT = Dynamic COMMENT='文件表';

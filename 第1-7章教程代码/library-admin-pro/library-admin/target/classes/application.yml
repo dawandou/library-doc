@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: library
+  profiles:
+    active: dev
+
+  # 上传文件大小配置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  # json序列化相关配置
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+server:
+  servlet:
+    context-path: '/library'
+
+#mybatis-plus相关配置
+mybatis-plus:
+  global-config:
+    # 关闭MP3.0自带的banner
+    banner: false
+    db-config:
+      id-type: auto
+      # 默认数据库表下划线命名
+      table-underline: true
+  #扫描mapper下的所有xml文件
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 返回类型为Map,显示null对应的字段
+    call-setters-on-nulls: true

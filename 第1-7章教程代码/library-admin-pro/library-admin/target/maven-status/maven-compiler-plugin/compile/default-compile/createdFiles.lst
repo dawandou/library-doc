@@ -1,0 +1,12 @@
+com\captian\admin\modules\user\vo\UserVO.class
+com\captian\admin\modules\user\bo\UserInsert.class
+com\captian\admin\modules\user\entity\User.class
+com\captian\admin\modules\user\service\UserService.class
+com\captian\admin\controller\UserController.class
+com\captian\admin\modules\user\bo\UserPage.class
+com\captian\admin\LibraryAdminApplication.class
+com\captian\admin\modules\user\struct\UserStructMapper.class
+com\captian\admin\modules\user\struct\UserStructMapperImpl.class
+com\captian\admin\modules\user\service\impl\UserServiceImpl.class
+com\captian\admin\modules\user\bo\UserUpdate.class
+com\captian\admin\modules\user\mapper\UserMapper.class
